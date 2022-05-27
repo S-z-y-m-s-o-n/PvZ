@@ -12,9 +12,9 @@ APoisonousBerry::APoisonousBerry()
 	Fruit2 = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Fruit2"));
 	Fruit3 = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Fruit3"));
 
-	Fruit1->SetupAttachment(Sprite);
-	Fruit2->SetupAttachment(Sprite);
-	Fruit3->SetupAttachment(Sprite);
+	Fruit1->SetupAttachment(SpriteComponent);
+	Fruit2->SetupAttachment(SpriteComponent);
+	Fruit3->SetupAttachment(SpriteComponent);
 
 	Fruits.Add(Fruit1);
 	Fruits.Add(Fruit2);
@@ -55,13 +55,6 @@ void APoisonousBerry::Damage(float value)
 	{
 		Super::Damage(value);
 	}
-}
-
-void APoisonousBerry::Plant(AGridCell* GridCell)
-{
-	FTimerHandle Handle;
-	GetWorldTimerManager().SetTimer(Handle, this, &APoisonousBerry::a1, 8.f, true);
-	Super::Plant(GridCell);
 }
 
 void APoisonousBerry::Tick(float DeltaTime)

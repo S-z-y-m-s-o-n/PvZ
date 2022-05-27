@@ -17,8 +17,8 @@ APlayerPawn::APlayerPawn()
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(RootComponent);
 
-	//SideViewCameraComponent->ProjectionMode = ECameraProjectionMode::Orthographic;
-	//SideViewCameraComponent->OrthoWidth = 2048.0f;
+	Camera->ProjectionMode = ECameraProjectionMode::Orthographic;
+	Camera->OrthoWidth = 2048.0f/1.65;
 }
 
 void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

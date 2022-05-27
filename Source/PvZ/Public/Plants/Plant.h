@@ -5,18 +5,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Game/FightingActor.h"
 #include "Plant.generated.h"
 
 UCLASS()
-class PVZ_API APlant : public AActor
+class PVZ_API APlant : public AFightingActor
 {
 	GENERATED_BODY()
 
 public:
 	APlant();
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		class UPaperFlipbookComponent* Sprite;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UMaterial* NormalMaterial;
@@ -28,6 +26,8 @@ public:
 		float MaxHealth;
 
 	float Health;
+
+	bool bIsDestructible = true;
 
 	UPROPERTY()
 	bool isPlanted = false;

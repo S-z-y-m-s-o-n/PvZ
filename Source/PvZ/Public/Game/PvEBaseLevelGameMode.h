@@ -40,10 +40,18 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class APlant> PoisonousBerryClass;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
+		TSubclassOf<class AStandardZombie> StandardZombieClass;
+
 	class APlant* ChoosenPlant;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<class AGridCell*> Grid;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<class AGridCell*> SpawningGrid;
+
+	float ZombieSpawningTime = 10;
 
 	class AGridCell* SelectedGridCell;
 
@@ -60,6 +68,8 @@ protected:
 	void LMB();
 
 	void SpawnSun();
+
+	void SpawnZombie();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class UUserWidget> SunCounterClass;

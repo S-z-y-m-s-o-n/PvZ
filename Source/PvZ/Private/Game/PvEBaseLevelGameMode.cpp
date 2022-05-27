@@ -13,6 +13,10 @@
 #include "Player/PlayerPawn.h"
 #include "Plants/Plant.h"
 
+#include "Enemies/StandardZombie.h"
+
+#include <ctime>
+
 APvEBaseLevelGameMode::APvEBaseLevelGameMode()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -40,6 +44,17 @@ void APvEBaseLevelGameMode::BeginPlay()
 	}
 
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->bShowMouseCursor = true;
+
+	for (int i = 0; i < Grid.Num(); i++)
+	{
+		if (Grid[i]->GridPosition.Y == 9)
+		{
+			SpawningGrid.Add(Grid[i]);
+		}
+	}
+
+	FTimerHandle handle;
+	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime, false);
 }
 
 void APvEBaseLevelGameMode::Tick(float DeltaTime)
@@ -51,12 +66,12 @@ void APvEBaseLevelGameMode::Tick(float DeltaTime)
 		FHitResult Hit;
 		if (GetWorld()->GetFirstPlayerController()->GetHitResultUnderCursor(ECC_GameTraceChannel1, true, Hit))
 		{
-			ChoosenPlant->Sprite->SetVisibility(true);
-			ChoosenPlant->SetActorLocation(Hit.ImpactPoint + FVector(0, 0, 0.005));
+			ChoosenPlant->SpriteComponent->SetVisibility(true);
+			ChoosenPlant->SetActorLocation(Hit.ImpactPoint + FVector(0, 0.1, 0));
 		}
 		else
 		{
-			ChoosenPlant->Sprite->SetVisibility(false);
+			ChoosenPlant->SpriteComponent->SetVisibility(false);
 		}
 	}
 	ClearGridChoice();
@@ -170,4 +185,15 @@ void APvEBaseLevelGameMode::HighlightGrid()
 void APvEBaseLevelGameMode::SpawnSun()
 {
 	SunCount += 2;
+}
+
+void APvEBaseLevelGameMode::SpawnZombie()
+{
+	int row = FMath::RandRange(0, SpawningGrid.Num()-1);
+	AStandardZombie* zombie = Cast<AStandardZombie>(GetWorld()->SpawnActor(StandardZombieClass.Get()));
+	zombie->SetActorLocation(SpawningGrid[row]->GetActorLocation());
+	zombie->Row = row + 1;
+
+	FTimerHandle handle;
+	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime = (ZombieSpawningTime * (0.98 - ZombieSpawningTime / 130)), false);
 }

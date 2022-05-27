@@ -48,7 +48,5 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void Plant(AGridCell* GridCell);
-
 	APoisonousBerry();
 };
