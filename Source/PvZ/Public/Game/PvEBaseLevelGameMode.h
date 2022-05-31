@@ -41,6 +41,12 @@ protected:
 		TSubclassOf<class APlant> PoisonousBerryClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
+		TSubclassOf<class APlant> DoublePeaShooterClass;
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
+		//TSubclassOf<class ADamagableEquipment> ConeClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class AStandardZombie> StandardZombieClass;
 
 	class APlant* ChoosenPlant;
@@ -61,6 +67,7 @@ protected:
 	FORCEINLINE void slot2() { ChoosePlant(PeaShooterClass); }
 	FORCEINLINE void slot3() { ChoosePlant(WalnutClass); }
 	FORCEINLINE void slot4() { ChoosePlant(PoisonousBerryClass); }
+	FORCEINLINE void slot5() { ChoosePlant(DoublePeaShooterClass); }
 
 	void UnchoosePlant();
 	void PlantOut();

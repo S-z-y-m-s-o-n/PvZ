@@ -16,6 +16,16 @@ protected:
 
 	float speed = 17.5;
 
+	UPROPERTY()
+		class ADamagableEquipment* Armor;
+
 public:
+
+	virtual void SetArmor(class ADamagableEquipment* armor);
+
+	virtual float Damage(float value, enum EDamageType damageType, AActor* source) override;
+
+	virtual void EndPlay(EEndPlayReason::Type reason) override;
+
 	AStandardZombie();
 };

@@ -13,13 +13,13 @@ class PVZ_API APoisonousBerry : public APlant
 private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UPaperFlipbookComponent* Fruit1;
+		class UPaperFlipbookComponent* Fruit1a;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UPaperFlipbookComponent* Fruit2;
+		class UPaperFlipbookComponent* Fruit2a;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UPaperFlipbookComponent* Fruit3;
+		class UPaperFlipbookComponent* Fruit3a;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		class UMaterial* FruitNormalMaterial;
@@ -31,7 +31,7 @@ private:
 	TArray<bool> FruitStatus{ false, false, false };
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		float FruitRegrowthTime = 2.f;
+		float FruitRegrowthTime = 10.f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		float MaxFruitHealth = 100;
@@ -40,11 +40,9 @@ private:
 
 protected:
 	virtual void BeginPlay() override;
-
-	void a1() { Damage(500); }
 	
 public:
-	virtual void Damage(float value) override;
+	virtual float Damage(float value, enum EDamageType damageType, AActor* source) override;
 
 	virtual void Tick(float DeltaTime) override;
 

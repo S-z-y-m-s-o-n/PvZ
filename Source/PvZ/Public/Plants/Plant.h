@@ -22,11 +22,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UMaterial* TranslucentMaterial;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-		float MaxHealth;
-
-	float Health;
-
 	bool bIsDestructible = true;
 
 	UPROPERTY()
@@ -35,8 +30,6 @@ public:
 	class AGridCell* OccupiedGridCell = nullptr;
 
 	virtual void Plant(class AGridCell* GridCell);
-
-	virtual void Damage(float value);
 
 	virtual void Tick(float DeltaTime) override;
 

@@ -49,15 +49,6 @@ void APlant::Plant(AGridCell* GridCell)
 	OccupiedGridCell = GridCell;
 }
 
-void APlant::Damage(float value)
-{
-	Health -= value;
-	if (Health <= 0)
-	{
-		Destroy();
-	}
-}
-
 void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

@@ -35,4 +35,5 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("2", IE_Pressed, game, &APvEBaseLevelGameMode::slot2);
 	PlayerInputComponent->BindAction("3", IE_Pressed, game, &APvEBaseLevelGameMode::slot3);
 	PlayerInputComponent->BindAction("4", IE_Pressed, game, &APvEBaseLevelGameMode::slot4);
+	PlayerInputComponent->BindAction("5", IE_Pressed, game, &APvEBaseLevelGameMode::slot5);
 }

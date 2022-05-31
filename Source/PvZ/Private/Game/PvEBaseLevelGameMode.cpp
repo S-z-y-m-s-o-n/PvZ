@@ -193,7 +193,8 @@ void APvEBaseLevelGameMode::SpawnZombie()
 	AStandardZombie* zombie = Cast<AStandardZombie>(GetWorld()->SpawnActor(StandardZombieClass.Get()));
 	zombie->SetActorLocation(SpawningGrid[row]->GetActorLocation());
 	zombie->Row = row + 1;
+	//zombie->SetArmor((ADamagableEquipment*)GetWorld()->SpawnActor(ConeClass.Get()));
 
 	FTimerHandle handle;
-	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime = (ZombieSpawningTime * (0.98 - ZombieSpawningTime / 130)), false);
+	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime = (ZombieSpawningTime * (0.955)), false);
 }

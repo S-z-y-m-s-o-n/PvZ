@@ -4,10 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "Projectiles/Projectile.h"
+
 #include "PeaProjectile.generated.h"
 
 UCLASS()
-class PVZ_API APeaProjectile : public AActor
+class PVZ_API APeaProjectile : public AProjectile
 {
 	GENERATED_BODY()
 	
@@ -16,9 +19,9 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		class UPaperFlipbookComponent* SpriteComponent;
-
 protected:
 	virtual void BeginPlay() override;
+
+	UFUNCTION()
+		void OnSpriteBeginOverlap(UPrimitiveComponent* comp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 };

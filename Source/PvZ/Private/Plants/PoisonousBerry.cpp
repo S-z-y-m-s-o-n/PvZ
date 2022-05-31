@@ -5,6 +5,12 @@
 #include "Plants/PoisonousBerry.h"
 #include "Game/GridCell.h"
 
+#include "Game/Damage.h"
+
+#define Fruit1 Fruit1a
+#define Fruit2 Fruit2a
+#define Fruit3 Fruit3a
+
 APoisonousBerry::APoisonousBerry()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -32,7 +38,7 @@ void APoisonousBerry::UpdateFruits()
 	}
 }
 
-void APoisonousBerry::Damage(float value)
+float APoisonousBerry::Damage(float value, EDamageType damageType, AActor* source)
 {
 	for (int i = 0; i <= 2; i++)
 	{
@@ -44,17 +50,23 @@ void APoisonousBerry::Damage(float value)
 				FruitStatus[i] = false;
 				value = abs(FruitHealth[i]);
 				FruitHealth[i] = 0;
+				if (damageType == EDamageType::Eating)
+				{
+					((AFightingActor*)source)->Damage(-1.f, EDamageType::Poison, this);
+					return 0;
+				}
 				UpdateFruits();
-				if (value == 0) { return; }
+				if (value == 0) { return 0; }
 			}
-			else { return; }
+			else { return 0; }
 		}
 	}
 	UpdateFruits();
 	if (value > 0)
 	{
-		Super::Damage(value);
+		return(Super::Damage(value, damageType, source));
 	}
+	return 0;
 }
 
 void APoisonousBerry::Tick(float DeltaTime)
