@@ -30,6 +30,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		class UPaperFlipbookComponent* SpriteComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		class UBoxComponent* BoxCollision;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float MaxHealth;
 

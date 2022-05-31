@@ -19,6 +19,9 @@ protected:
 	UPROPERTY()
 		class ADamagableEquipment* Armor;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		TArray<AActor*> overlappingActors;
+
 public:
 
 	virtual void SetArmor(class ADamagableEquipment* armor);

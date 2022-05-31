@@ -2,11 +2,15 @@
 #include "Game/FightingActor.h"
 
 #include "PaperFlipbookComponent.h"
+#include "Components/BoxComponent.h"
 
 AFightingActor::AFightingActor()
 {
 	SpriteComponent = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Sprite"));
 	SetRootComponent(SpriteComponent);
+
+	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
+	BoxCollision->SetupAttachment(SpriteComponent);
 }
 
 void AFightingActor::BeginPlay()

@@ -17,5 +17,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 		class UPaperFlipbookComponent* SpriteComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		class UBoxComponent* BoxCollision;
+
 	class AFightingActor* Owner;
 };

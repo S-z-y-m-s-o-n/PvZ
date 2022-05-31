@@ -38,7 +38,7 @@ void ADoublePeashooter::Tick(float DeltaTime)
 void ADoublePeashooter::Shoot(bool bContinue)
 {
 	AActor* projectile = GetWorld()->SpawnActor(ProjectileClass.Get());
-	projectile->SetActorLocation(GetActorLocation());
+	projectile->SetActorLocation(GetActorLocation() + FVector(0, 0.3, 0));
 	((AProjectile*)projectile)->Owner = this;
 	bReadyToShoot = false;
 	if (bContinue)

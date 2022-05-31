@@ -33,7 +33,7 @@ void APeashooter::Tick(float DeltaTime)
 			if (actor->Side == ESide::Zombies && actor->bIsDamagable && actor->Row == OccupiedGridCell->GridPosition.X && actor->GetActorLocation().X > GetActorLocation().X)
 			{
 				AActor* projectile = GetWorld()->SpawnActor(ProjectileClass.Get());
-				projectile->SetActorLocation(GetActorLocation());
+				projectile->SetActorLocation(GetActorLocation() + FVector(0, 0.3, 0));
 				bReadyToShoot = false;
 				FTimerHandle handle;
 				GetWorldTimerManager().SetTimer(handle, this, &APeashooter::PrepareShoot, 0.85, false);

@@ -52,6 +52,7 @@ float APoisonousBerry::Damage(float value, EDamageType damageType, AActor* sourc
 				FruitHealth[i] = 0;
 				if (damageType == EDamageType::Eating)
 				{
+					UpdateFruits();
 					((AFightingActor*)source)->Damage(-1.f, EDamageType::Poison, this);
 					return 0;
 				}

@@ -4,6 +4,7 @@
 #include "Materials/MaterialInstanceDynamic.h"
 
 #include "PaperFlipbookComponent.h"
+#include "Components/BoxComponent.h"
 
 #include "Game/GridCell.h"
 
@@ -14,6 +15,9 @@ APlant::APlant()
 	Side = ESide::Plants;
 
 	SpriteComponent->TranslucencySortPriority = 1;
+
+	BoxCollision->SetCollisionResponseToChannel(ECC_EngineTraceChannel2, ECollisionResponse::ECR_Overlap);
+
 }
 
 void APlant::BeginPlay()
@@ -42,7 +46,7 @@ void APlant::Plant(AGridCell* GridCell)
 
 	SpriteComponent->SetMaterial(0, NormalMaterial);
 
-	SetActorLocation(GridCell->GetActorLocation());
+	SetActorLocation(GridCell->GetActorLocation() + FVector(0, 0.1, 0));
 	SetActorRotation(FRotator(0,0,0));
 	GridCell->bIsOccupied = true;
 	GridCell->OccupyingPlant = this;

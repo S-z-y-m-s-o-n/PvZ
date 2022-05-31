@@ -24,7 +24,7 @@ UPvZGameInstance::UPvZGameInstance()
 	DoublePeashooterData->SetValues(8, 2.f, NewObject<UTexture2D>());
 
 	UPlantData* PoisonousBerryData = NewObject<UPlantData>();
-	PoisonousBerryData->SetValues(2, 0.8, NewObject<UTexture2D>());
+	PoisonousBerryData->SetValues(6, 0.8, NewObject<UTexture2D>());
 
 	PlantData.Add(ASunflower::StaticClass(), SunflowerData);
 	PlantData.Add(APeashooter::StaticClass(), PeashooterData);

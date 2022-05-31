@@ -43,8 +43,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class APlant> DoublePeaShooterClass;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		//TSubclassOf<class ADamagableEquipment> ConeClass;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
+		TSubclassOf<class ADamagableEquipment> ConeClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class AStandardZombie> StandardZombieClass;
@@ -57,7 +57,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<class AGridCell*> SpawningGrid;
 
-	float ZombieSpawningTime = 10;
+	float ZombieSpawningTime = 10.5;
 
 	class AGridCell* SelectedGridCell;
 

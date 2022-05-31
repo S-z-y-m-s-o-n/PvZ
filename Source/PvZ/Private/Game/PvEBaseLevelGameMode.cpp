@@ -14,6 +14,7 @@
 #include "Plants/Plant.h"
 
 #include "Enemies/StandardZombie.h"
+#include "Enemies/Equipment/DamagableEquipment.h"
 
 #include <ctime>
 
@@ -191,10 +192,10 @@ void APvEBaseLevelGameMode::SpawnZombie()
 {
 	int row = FMath::RandRange(0, SpawningGrid.Num()-1);
 	AStandardZombie* zombie = Cast<AStandardZombie>(GetWorld()->SpawnActor(StandardZombieClass.Get()));
-	zombie->SetActorLocation(SpawningGrid[row]->GetActorLocation());
+	zombie->SetActorLocation(SpawningGrid[row]->GetActorLocation() + FVector(0, 0.2, 0));
 	zombie->Row = row + 1;
-	//zombie->SetArmor((ADamagableEquipment*)GetWorld()->SpawnActor(ConeClass.Get()));
+	zombie->SetArmor((ADamagableEquipment*)GetWorld()->SpawnActor(ConeClass.Get()));
 
 	FTimerHandle handle;
-	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime = (ZombieSpawningTime * (0.955)), false);
+	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime = (ZombieSpawningTime * (0.925)), false);
 }

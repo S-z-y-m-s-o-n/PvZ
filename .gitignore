@@ -12,3 +12,9 @@ Saved
 *.suo
 *.xcodeproj
 *.xcworkspace
+Build/WindowsNoEditor/FileOpenOrder/CookerOpenOrder.log
+*.log
+Out/WindowsNoEditor/PvZ.exe
+Out/WindowsNoEditor/Engine/Extras/Redist/en-us/UE4PrereqSetup_x64.exe
+Out/WindowsNoEditor/PvZ/Content/Paks/PvZ-WindowsNoEditor.pak
+Out/WindowsNoEditor/Manifest_NonUFSFiles_Win64.txt

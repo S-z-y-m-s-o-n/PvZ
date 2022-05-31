@@ -4,6 +4,7 @@
 #include "PaperFlipbookComponent.h"
 
 #include "Enemies/Equipment/DamagableEquipment.h"
+#include "Plants/Plant.h"
 
 #include "Game/Damage.h"
 
@@ -21,22 +22,23 @@ void AStandardZombie::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	FHitResult hit;
-	GetWorld()->LineTraceSingleByChannel(hit, GetActorLocation(), GetActorLocation() + FVector(-50, 0, 0), ECC_Visibility);
-	AFightingActor* actor = Cast<AFightingActor>(hit.Actor);
-	if (hit.Actor != nullptr)
+	GetOverlappingActors(overlappingActors, APlant::StaticClass());
+	for (int i = 0; i <= overlappingActors.Num() - 1; i++)
 	{
+		AFightingActor* actor = Cast<AFightingActor>(overlappingActors[i]);
+		if (actor != nullptr)
+		{
+			if (actor->Side == ESide::Plants && actor->bIsDamagable)
+			{
+				actor->Damage(DeltaTime * 100, EDamageType::Eating, this);
+				return;
+			}
+		}
+	}
 
-	}
-	if (actor && actor->Side == ESide::Plants && actor->bIsDamagable)
-	{
-		actor->Damage(DeltaTime * 100, EDamageType::Eating, this);
-	}
-	else
-	{
-		FVector Location = GetActorLocation();
-		SetActorLocation(FVector(Location.X - DeltaTime * speed, Location.Y, Location.Z));
-	}
+	FVector Location = GetActorLocation();
+	SetActorLocation(FVector(Location.X - DeltaTime * speed, Location.Y, Location.Z));
+
 	if (Armor)
 	{
 		Armor->SetActorLocation(GetActorLocation() + FVector(0, 0.1, 0));

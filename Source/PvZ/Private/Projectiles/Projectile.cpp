@@ -1,11 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "Projectiles/Projectile.h"
 
 #include "Game/FightingActor.h"
 
 #include "PaperFlipbookComponent.h"
+#include "Components/BoxComponent.h"
 
 AProjectile::AProjectile()
 {
@@ -13,5 +12,8 @@ AProjectile::AProjectile()
 
 	SpriteComponent = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Sprite Component"));
 	SetRootComponent(SpriteComponent);
+
+	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
+	BoxCollision->SetupAttachment(SpriteComponent);
 }
 
