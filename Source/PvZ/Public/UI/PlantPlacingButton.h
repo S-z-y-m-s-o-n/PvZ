@@ -13,12 +13,13 @@ class PVZ_API UPlantPlacingButton : public UUserWidget
 protected:
 	TSubclassOf<class APlantn> PlantClass;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Cooldown;
 
+	UFUNCTION(BlueprintCallable)
 	void OnClicked();
 
 public:
-	void Setup(TSubclassOf<class APlantn> PlantClass, float Cooldown);
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 };

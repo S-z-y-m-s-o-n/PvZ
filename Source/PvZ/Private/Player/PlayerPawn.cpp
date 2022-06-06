@@ -10,6 +10,9 @@
 #include "Game/PvEBaseLevelGameMode.h"
 
 #include "Blueprint/UserWidget.h"
+#include "UI/PlantSlot.h"
+
+#include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 
 APlayerPawn::APlayerPawn()
@@ -36,4 +39,14 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("3", IE_Pressed, game, &APvEBaseLevelGameMode::slot3);
 	PlayerInputComponent->BindAction("4", IE_Pressed, game, &APvEBaseLevelGameMode::slot4);
 	PlayerInputComponent->BindAction("5", IE_Pressed, game, &APvEBaseLevelGameMode::slot5);
+}
+
+void APlayerPawn::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//UPlantSlot* widget = CreateWidget<UPlantSlot>(GetGameInstance(), PlantSlotClass);
+
+	//widget->AddToViewport();
+	//widget->PlantClass = CLASS(SunflowerClass);
 }

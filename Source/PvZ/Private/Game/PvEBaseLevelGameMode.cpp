@@ -2,13 +2,14 @@
 
 #include "Game/PvEBaseLevelGameMode.h"
 
+#include "Game/PvZGameInstance.h"
+
 #include "Kismet/GameplayStatics.h"
 #include "Blueprint/UserWidget.h"
 #include "PaperSpriteComponent.h"
 #include "PaperFlipbookComponent.h"
 
 #include "Game/GridCell.h"
-#include "Game/PvZGameInstance.h"
 
 #include "Player/PlayerPawn.h"
 #include "Plants/Plant.h"
@@ -29,6 +30,11 @@ void APvEBaseLevelGameMode::BeginPlay()
 
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetGameInstance(), SunCounterClass);
 	Widget->AddToViewport();
+	
+	if (Widget->IsInViewport())
+	{
+		printf("");
+	}
 
 	if (bSpawnSun)
 	{
@@ -48,7 +54,7 @@ void APvEBaseLevelGameMode::BeginPlay()
 
 	for (int i = 0; i < Grid.Num(); i++)
 	{
-		if (Grid[i]->GridPosition.Y == 9)
+		if (Grid[i]->GridPosition.Y == 10)
 		{
 			SpawningGrid.Add(Grid[i]);
 		}
@@ -69,6 +75,7 @@ void APvEBaseLevelGameMode::Tick(float DeltaTime)
 		{
 			ChoosenPlant->SpriteComponent->SetVisibility(true);
 			ChoosenPlant->SetActorLocation(Hit.ImpactPoint + FVector(0, 0.1, 0));
+			ChoosenPlant->SetActorRotation(FRotator(0, 0, 0));
 		}
 		else
 		{
@@ -134,14 +141,13 @@ void APvEBaseLevelGameMode::ClearGridChoice()
 
 void APvEBaseLevelGameMode::LMB()
 {
-	if (ChoosenPlantClass != nullptr && Cast<UPvZGameInstance>(GetGameInstance())->PlantData.Find(ChoosenPlantClass->GetSuperClass()))
+	if (ChoosenPlantClass)
 	{
-		UPlantData* ChoosenPlantData = *Cast<UPvZGameInstance>(GetGameInstance())->PlantData.Find(ChoosenPlantClass->GetSuperClass());
-		if (SelectedColumn != 0 && SelectedRow != 0 && !SelectedGridCell->bIsOccupied
-			&& ChoosenPlantData->SunCost <= SunCount)
+		UPlantData* data = *PData.Find(ChoosenPlantClass);
+		if (SelectedColumn != 0 && SelectedRow != 0 && !SelectedGridCell->bIsOccupied && data->SunCost <= SunCount)
 		{
 			ChoosenPlant->Plant(SelectedGridCell);
-			SunCount -= ChoosenPlantData->SunCost;
+			SunCount -= data->SunCost;
 
 			ClearGridChoice();
 			ChoosenPlant = nullptr;
@@ -190,11 +196,11 @@ void APvEBaseLevelGameMode::SpawnSun()
 
 void APvEBaseLevelGameMode::SpawnZombie()
 {
-	int row = FMath::RandRange(0, SpawningGrid.Num()-1);
-	AStandardZombie* zombie = Cast<AStandardZombie>(GetWorld()->SpawnActor(StandardZombieClass.Get()));
+	int row = FMath::RandRange(0, SpawningGrid.Num() - 1);
+	AStandardZombie* zombie = Cast<AStandardZombie>(GetWorld()->SpawnActor(CLASS(StandardZombieClass).Get()));
 	zombie->SetActorLocation(SpawningGrid[row]->GetActorLocation() + FVector(0, 0.2, 0));
 	zombie->Row = row + 1;
-	zombie->SetArmor((ADamagableEquipment*)GetWorld()->SpawnActor(ConeClass.Get()));
+	zombie->SetArmor((ADamagableEquipment*)GetWorld()->SpawnActor(CLASS(ConeClass).Get()));
 
 	FTimerHandle handle;
 	GetWorldTimerManager().SetTimer(handle, this, &APvEBaseLevelGameMode::SpawnZombie, ZombieSpawningTime = (ZombieSpawningTime * (0.925)), false);

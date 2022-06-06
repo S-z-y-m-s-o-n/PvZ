@@ -18,6 +18,7 @@ APlant::APlant()
 
 	BoxCollision->SetCollisionResponseToChannel(ECC_EngineTraceChannel2, ECollisionResponse::ECR_Overlap);
 
+	bIsDamagable = false;
 }
 
 void APlant::BeginPlay()
@@ -40,21 +41,27 @@ void APlant::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	}
 }
 
-void APlant::Plant(AGridCell* GridCell)
+void APlant::Plant(AGridCell* gridCell)
 {
 	isPlanted = true;
 
 	SpriteComponent->SetMaterial(0, NormalMaterial);
 
-	SetActorLocation(GridCell->GetActorLocation() + FVector(0, 0.1, 0));
+	SetActorLocation(gridCell->GetActorLocation() + FVector(0, 0.1, 0));
 	SetActorRotation(FRotator(0,0,0));
-	GridCell->bIsOccupied = true;
-	GridCell->OccupyingPlant = this;
-	OccupiedGridCell = GridCell;
+	gridCell->bIsOccupied = true;
+	gridCell->OccupyingPlant = this;
+	OccupiedGridCell = gridCell;
+	bIsDamagable = true;
 }
 
 void APlant::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+bool APlant::CanBePlanted(AGridCell* gridCell)
+{
+	return !gridCell->bIsOccupied;
 }

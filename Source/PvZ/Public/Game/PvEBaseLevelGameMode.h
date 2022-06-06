@@ -3,6 +3,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+
+#include "Game/PvZGameInstance.h"
+
 #include "PvEBaseLevelGameMode.generated.h"
 
 UCLASS()
@@ -26,28 +29,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		class UMaterialInterface* GridMaterial2;
 
-	TSubclassOf<class APlant> ChoosenPlantClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class APlant> WalnutClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class APlant> SunflowerClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class APlant> PeaShooterClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class APlant> PoisonousBerryClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class APlant> DoublePeaShooterClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class ADamagableEquipment> ConeClass;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Plants", meta = (AllowPrivateAccess = "true"))
-		TSubclassOf<class AStandardZombie> StandardZombieClass;
+	UClass* ChoosenPlantClass;
 
 	class APlant* ChoosenPlant;
 
@@ -63,11 +45,11 @@ protected:
 
 	void ChoosePlant(TSubclassOf<class APlant> PlantClass);
 
-	FORCEINLINE void slot1() { ChoosePlant(SunflowerClass); }
-	FORCEINLINE void slot2() { ChoosePlant(PeaShooterClass); }
-	FORCEINLINE void slot3() { ChoosePlant(WalnutClass); }
-	FORCEINLINE void slot4() { ChoosePlant(PoisonousBerryClass); }
-	FORCEINLINE void slot5() { ChoosePlant(DoublePeaShooterClass); }
+	FORCEINLINE void slot1() { ChoosePlant(CLASS(SunflowerClass)); }
+	FORCEINLINE void slot2() { ChoosePlant(CLASS(PeashooterClass)); }
+	FORCEINLINE void slot3() { ChoosePlant(CLASS(WalnutClass)); }
+	FORCEINLINE void slot4() { ChoosePlant(CLASS(PoisonousBerryClass)); }
+	FORCEINLINE void slot5() { ChoosePlant(CLASS(DoublePeashooterClass)); }
 
 	void UnchoosePlant();
 	void PlantOut();
@@ -80,6 +62,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class UUserWidget> SunCounterClass;
+
 public:
 	virtual void Tick(float DeltaTime) override;
 

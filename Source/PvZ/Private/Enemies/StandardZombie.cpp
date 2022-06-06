@@ -41,7 +41,7 @@ void AStandardZombie::Tick(float DeltaTime)
 
 	if (Armor)
 	{
-		Armor->SetActorLocation(GetActorLocation() + FVector(0, 0.1, 0));
+		Armor->SetActorLocation(GetActorLocation() + FVector(0, 1, 0));
 	}
 }
 
@@ -53,6 +53,7 @@ float AStandardZombie::Damage(float value, EDamageType damageType, AActor* sourc
 	}
 	else
 	{
+		UE_LOG(LogTemp, Warning, TEXT("%"), Health);
 		return(Super::Damage(value, damageType, source));
 	}
 }

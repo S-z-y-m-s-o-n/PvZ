@@ -2,6 +2,7 @@
 #include "Game/PvZGameInstance.h"
 
 #include "Plants/Plant.h"
+#include "Enemies/Equipment/DamagableEquipment.h"
 
 #include "Plants/Sunflower.h"
 #include "Plants/PeaShooter.h"
@@ -10,6 +11,11 @@
 #include "Plants/PoisonousBerry.h"
 
 UPvZGameInstance::UPvZGameInstance()
+{
+
+}
+
+void UPvZGameInstance::Init()
 {
 	UPlantData* SunflowerData = NewObject<UPlantData>();
 	SunflowerData->SetValues(2, 1.f, NewObject<UTexture2D>());
@@ -26,11 +32,11 @@ UPvZGameInstance::UPvZGameInstance()
 	UPlantData* PoisonousBerryData = NewObject<UPlantData>();
 	PoisonousBerryData->SetValues(6, 0.8, NewObject<UTexture2D>());
 
-	PlantData.Add(ASunflower::StaticClass(), SunflowerData);
-	PlantData.Add(APeashooter::StaticClass(), PeashooterData);
-	PlantData.Add(AWalnut::StaticClass(), WalnutData);
-	PlantData.Add(ADoublePeashooter::StaticClass(), DoublePeashooterData);
-	PlantData.Add(APoisonousBerry::StaticClass(), PoisonousBerryData);
+	PlantData.Add(SunflowerClass, SunflowerData);
+	PlantData.Add(PeashooterClass, PeashooterData);
+	PlantData.Add(WalnutClass, WalnutData);
+	PlantData.Add(DoublePeashooterClass, DoublePeashooterData);
+	PlantData.Add(PoisonousBerryClass, PoisonousBerryData);
 }
 
 void UPlantData::SetValues(int sunCost, float cooldown, UTexture2D* thumbnail)

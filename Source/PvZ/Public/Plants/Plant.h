@@ -29,9 +29,11 @@ public:
 
 	class AGridCell* OccupiedGridCell = nullptr;
 
-	virtual void Plant(class AGridCell* GridCell);
+	virtual void Plant(class AGridCell* gridCell);
 
 	virtual void Tick(float DeltaTime) override;
+
+	virtual bool CanBePlanted(class AGridCell* gridCell);
 
 protected:
 	virtual void BeginPlay() override;

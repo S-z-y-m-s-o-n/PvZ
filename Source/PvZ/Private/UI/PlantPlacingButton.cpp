@@ -5,12 +5,6 @@ void UPlantPlacingButton::OnClicked()
 {
 }
 
-void UPlantPlacingButton::Setup(TSubclassOf<class APlantn> plantClass, float cooldown)
-{
-	PlantClass = plantClass;
-	Cooldown = cooldown;
-}
-
 void UPlantPlacingButton::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	UUserWidget::NativeTick(MyGeometry, InDeltaTime);

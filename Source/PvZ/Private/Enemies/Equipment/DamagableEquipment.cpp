@@ -8,6 +8,7 @@ float ADamagableEquipment::Damage(float value, EDamageType damageType, AActor* s
 {
 	if (value == -1) { return -1; }
 	Health -= value;
+	UE_LOG(LogTemp, Warning, TEXT("%"), Health);
 	if (Health <= 0)
 	{
 		Destroy();
